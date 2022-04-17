@@ -90,7 +90,7 @@ class Preprocessing:
       w_stem = stemming(word)
       if is_root(w_stem):
         if not is_stopwords(w_stem):
-          token.cleaned(w_stem)
+          token.cleaned = w_stem
           self.tokens.append(token)
         continue
       
