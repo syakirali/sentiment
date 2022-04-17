@@ -1,9 +1,8 @@
 import re
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from IPython.display import display
 
-from .utils import (
-  ROOT_WORD, ABBREVIATION, stemming, change_abbreviation, is_stopwords, is_root)
-from .token import Token
+from analysis.utils import progress
 from .preprocessing import Preprocessing
 
 STOPWORDS = StopWordRemoverFactory().get_stop_words()
@@ -22,7 +21,11 @@ class PreprocessingFactory:
   def get_cleaned_data(self):
     return [ p.cleaned_text for p in self.data if p.is_cleaned ]
 
-  def clean_all(self):
-    for p in self.data:
-      p.clean()
+  def clean_all(self, show_progress=True):
+    if show_progress:
+      p = display(progress(0, 100), display_id=True)
+    for i, r in enumerate(self.data):
+      if show_progress:
+        p.update(progress((i+1)*100/len(self.data), 100))
+      r.clean()
     return self.get_cleaned_data()

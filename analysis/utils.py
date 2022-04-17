@@ -3,8 +3,8 @@ import sqlite3
 import pandas as pd
 import IPython
 from pathlib import Path
-from datetime import datetime
 from collections import Counter
+from IPython.display import HTML
 
 ROOT_PATH = Path(__file__).resolve().parent
 DEFAULT_DB = ROOT_PATH / "data" / "tweets3.db"
@@ -88,3 +88,15 @@ def term_freq(tweets):
   for tweet in tweets:
     terms.update(tweet.split(" "))
   return terms
+
+def progress(value, max=100):
+    return HTML("""
+        <progress
+            value='{value}'
+            max='{max}',
+            style='width: 100%'
+        >
+            {value}
+        </progress>
+        <div style="text-align: center;">{value}%</div>
+    """.format(value=value, max=max))
