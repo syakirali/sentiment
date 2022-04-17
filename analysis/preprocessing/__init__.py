@@ -5,4 +5,4 @@ from .utils import (
   ROOT_WORD, ABBREVIATION,
   get_abbreviation, change_abbreviation, stemming, is_stopwords, is_root, remove_stopwords
 )
-from wordEmbedding import (correction, correction2)
+from .wordEmbedding import (correction, correction2)
