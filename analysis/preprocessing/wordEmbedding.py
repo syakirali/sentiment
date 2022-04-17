@@ -8,7 +8,7 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from gensim.models.fasttext import FastText # module yang lebih baru
 from collections import Counter
 
-from ..settings import FASTTEXT_ID_BIN_FILE
+from analysis.settings import FASTTEXT_ID_BIN_FILE
 
 logging.basicConfig(level=logging.INFO)
 

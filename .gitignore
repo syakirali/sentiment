@@ -1,3 +1,4 @@
-lab
-data/cc.id.300*
+__pycache__
+/analysis/lab
+/analysis/data/cc.id.300*
 .ipynb_checkpoints
