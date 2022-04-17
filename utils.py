@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime
 from collections import Counter
 
-ROOT_PATH = Path(__file__).resolve()
+ROOT_PATH = Path(__file__).resolve().parent
 DEFAULT_DB = ROOT_PATH / "data" / "tweets3.db"
 DEFAULT_QUERY = "SELECT * FROM tweets"
 
