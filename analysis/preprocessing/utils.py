@@ -1,8 +1,6 @@
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-from pathlib import Path
-
-ROOT_PATH = Path(__file__).resolve().parents[1]
+from analysis.utils import ROOT_PATH
 
 stemmer_factory = StemmerFactory()
 stemmer = stemmer_factory.create_stemmer()

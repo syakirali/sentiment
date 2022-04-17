@@ -10,8 +10,9 @@ STOPWORDS = StopWordRemoverFactory().get_stop_words()
 
 class Preprocessing:
   
-  def __init__(self, text):
-    self.text = text
+  def __init__(self, tweet):
+    self.tweet_id = tweet['tweet_id']
+    self.text = tweet['text']
     self.cleaned_text = None
     self.tokens = []
 

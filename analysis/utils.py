@@ -81,7 +81,7 @@ ALARM = get_alarm()
 
 def play_alarm():
   global ALARM
-  IPython.display.Audio(ALARM, autoplay=True)
+  return IPython.display.Audio(ALARM, autoplay=True)
 
 def term_freq(tweets):
   terms = Counter()

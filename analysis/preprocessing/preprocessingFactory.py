@@ -5,7 +5,6 @@ from .utils import (
   ROOT_WORD, ABBREVIATION, stemming, change_abbreviation, is_stopwords, is_root)
 from .token import Token
 from .preprocessing import Preprocessing
-from .wordEmbedding import correction2
 
 STOPWORDS = StopWordRemoverFactory().get_stop_words()
 
@@ -18,7 +17,7 @@ class PreprocessingFactory:
     self.cleaned_data = []
 
   def load_data(self, d):
-    self.data = [ Preprocessing(text) for text in d ]
+    self.data = [ Preprocessing(tweet) for tweet in d ]
 
   def get_cleaned_data(self):
     return [ p.cleaned_text for p in self.data if p.is_cleaned ]

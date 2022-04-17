@@ -4,22 +4,15 @@ import gensim
 from collections import Counter
 from datetime import timedelta
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-# from gensim.models.wrappers import FastText # module yang lama
-from gensim.models.fasttext import FastText # module yang lebih baru
 from collections import Counter
 
-from analysis.settings import FASTTEXT_ID_BIN_FILE
+from analysis.utils import ROOT_PATH
 
 logging.basicConfig(level=logging.INFO)
 
-model = FastText.load_fasttext_format(FASTTEXT_ID_BIN_FILE)
-
-
-dictionary1 = list(model.wv.vocab)
-dictionary1 = [term for term in dictionary1 
-                  if len(term) > 1 and re.search(r'[^a-z-]', term.lower()) is None]
-dictionary1 += [
-                "pemilu","pilpres","kpu", ""]
+with open(ROOT_PATH / "data" / "dictionary.txt", 'r') as file:
+    content = file.read()
+    dictionary1 = content.split(",")
 
 factory = StemmerFactory()
 dictionary2 = factory.get_words()

@@ -1,4 +1,6 @@
 __pycache__
 /analysis/lab
 /analysis/data/cc.id.300*
-.ipynb_checkpoints
+/.ipynb_checkpoints
+/.vscode
+*.backup.py
