@@ -8,9 +8,11 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from gensim.models.fasttext import FastText # module yang lebih baru
 from collections import Counter
 
+from ..settings import FASTTEXT_ID_BIN_FILE
+
 logging.basicConfig(level=logging.INFO)
 
-model = FastText.load_fasttext_format('drive/My Drive/Skripsi/Google Colab/cc.id.300.bin')
+model = FastText.load_fasttext_format(FASTTEXT_ID_BIN_FILE)
 
 
 dictionary1 = list(model.wv.vocab)

@@ -50,13 +50,10 @@ def get_emoticon_list():
   emot = [":-)", ":)", ":D", ":o)", ":]", ":3", ":c)", ":>", "=]", "8)"]
   return emot
 
-def load_from_csv(
-    path="/content/drive/My Drive/Skripsi/Google Colab/tweets5_202001131819.csv"):
+def load_from_csv(path):
   pd.set_option('display.float_format', lambda x: '%.3f' % x)
   data = pd.read_csv(path)
-  tweets = data["text"]
-  # tweets.tail()
-  data["tweet_id"].tail()
+  return data
 
 def bytearray_to_long(b):
   int.from_bytes(b, byteorder='big', signed=False)
@@ -77,12 +74,14 @@ def sqlite_to_csv(path, db_name, output):
     csv_writer.writerow([i[0] for i in cursor.description])
     csv_writer.writerows(cursor)
 
-def play_audio():
-  global audio
-  if audio is None:
-    r = requests.get('https://assets.mixkit.co/sfx/download/mixkit-vintage-warning-alarm-990.wav', allow_redirects=True)
-    audio = r.content
-  IPython.display.Audio(audio, autoplay=True)
+def get_alarm():
+  r = requests.get('https://assets.mixkit.co/sfx/download/mixkit-vintage-warning-alarm-990.wav', allow_redirects=True)
+  return r.content
+ALARM = get_alarm()
+
+def play_alarm():
+  global ALARM
+  IPython.display.Audio(ALARM, autoplay=True)
 
 def term_freq(tweets):
   terms = Counter()
