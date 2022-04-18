@@ -99,7 +99,7 @@ def progress(value, max=100):
     >
       {value:.1f}
     </progress>
-    <div style="text-align: center;">{value}%</div>
+    <div style="text-align: center;">{value:.1f}%</div>
   """.format(value=value, max=max))
 
 def strikeThrough(word):

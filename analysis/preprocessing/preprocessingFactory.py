@@ -36,8 +36,7 @@ class PreprocessingFactory:
     for i, r in enumerate(self.data):
       if show_progress:
         p.update(progress(
-          (i + 1) * 100 / len(self.data),
-          100)
-        )
+          (i + 1) * 100 / len(self.data), 100
+        ))
       r.clean()
     return self.get_cleaned_data(cached=False)
