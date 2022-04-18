@@ -28,6 +28,9 @@ class PreprocessingFactory:
   def get_cleaned_data(self):
     return [ p.cleaned_text for p in self.data if p.is_cleaned ]
 
+  def filter_indonesian(self):
+    self.data = [p for p in self.data if p.is_indonesian()]
+
   def clean_all(self, show_progress=True):
     if show_progress:
       p = display(progress(0, 100), display_id=True)

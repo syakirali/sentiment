@@ -1,5 +1,6 @@
 import re
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from langdetect import detect as detectlanguage
 
 from .utils import (
   ROOT_WORD, ABBREVIATION, stemming, change_abbreviation, is_stopwords, is_root)
@@ -37,7 +38,11 @@ class Preprocessing:
   def is_cleaned(self):
     return self.cleaned_text != None
 
-  def clean(self):
+  def is_indonesian(self):
+    text = self.clean_with_regex()
+    return text != '' and not text.isspace() and detectlanguage(text) == 'id'
+
+  def clean_with_regex(self):
     ###########
     # Convert to lower case
     cleaned = self.text.lower()
@@ -85,6 +90,11 @@ class Preprocessing:
     ###########
     # remove spaces at the beginning and at the end of the string
     cleaned = cleaned.strip()
+    return cleaned
+
+  def clean(self):
+
+    cleaned = self.clean_with_regex()
 
     for word in cleaned.split(" "):
 
