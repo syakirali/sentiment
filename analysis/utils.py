@@ -84,11 +84,11 @@ def play_alarm():
   global ALARM
   return IPython.display.Audio(ALARM, autoplay=True)
 
-def term_freq(tweets):
-  terms = Counter()
-  for tweet in tweets:
-    terms.update(tweet.split(" "))
-  return terms
+def term_freq(terms):
+  tf = Counter()
+  for t in terms:
+    terms.update(t)
+  return tf
 
 def progress(value, max=100):
   return HTML("""
