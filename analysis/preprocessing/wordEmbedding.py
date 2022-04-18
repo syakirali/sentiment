@@ -41,15 +41,16 @@ def candidates(word):
 
 def correction2(word):
     global WORDS, words1, words2
+    if word in words1 or word in words2:
+        return word
     WORDS = words1
     res = correction(word)
-    if res == '':
-        return word
-    if res == word:
-      WORDS = words2
-      res2 = correction(word)
-      res = res2 if res2 != '' else res
-    return res
+    if res != '':
+        return res
+    WORDS = words2
+    res = correction(word)
+    WORDS = words1
+    return res if res != '' else word
 
 def known(words):
     # "The subset of `words` that appear in the dictionary of WORDS."
