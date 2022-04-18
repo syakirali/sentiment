@@ -76,7 +76,7 @@ class Preprocessing:
     cleaned = cleaned.strip()
 
     for word in cleaned.split(" "):
-      if word == "":
+      if word == "" or is_stopwords(word):
         continue
 
       token = Token(word)
@@ -105,6 +105,3 @@ class Preprocessing:
       self.tokens.append(token)
     
     self.update_cleaned()
-
-    
-      
