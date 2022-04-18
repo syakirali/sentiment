@@ -43,9 +43,12 @@ def correction2(word):
     global WORDS, words1, words2
     WORDS = words1
     res = correction(word)
+    if res == '':
+        return word
     if res == word:
       WORDS = words2
-      res = correction(word)
+      res2 = correction(word)
+      res = res2 if res2 != '' else res
     return res
 
 def known(words):
