@@ -37,4 +37,4 @@ class PreprocessingFactory:
           (i + 1) * 100 / len(self.data), 100
         ))
       r.clean()
-    return self.get_cleaned_data(cached=False)
+    return True
