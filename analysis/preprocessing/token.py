@@ -1,9 +1,9 @@
 
 class Token:
 
-  def __init__(self, word):
+  def __init__(self, word, cleaned=None):
     self.term = word
-    self.cleaned = None
+    self.cleaned = cleaned
 
   def is_cleaned(self) -> bool:
     return self.cleaned is not None
