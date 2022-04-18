@@ -1,10 +1,11 @@
+import re
 import requests
 import sqlite3
 import pandas as pd
 import IPython
 from pathlib import Path
 from collections import Counter
-from IPython.display import HTML
+from IPython.display import HTML, display
 
 ROOT_PATH = Path(__file__).resolve().parent
 DEFAULT_DB = ROOT_PATH / "data" / "tweets3.db"
@@ -90,13 +91,41 @@ def term_freq(tweets):
   return terms
 
 def progress(value, max=100):
-    return HTML("""
-        <progress
-            value='{value}'
-            max='{max}',
-            style='width: 100%'
-        >
-            {value}
-        </progress>
-        <div style="text-align: center;">{value}%</div>
-    """.format(value=value, max=max))
+  return HTML("""
+    <progress
+      value='{value}'
+      max='{max}',
+      style='width: 100%'
+    >
+      {value:.1f}
+    </progress>
+    <div style="text-align: center;">{value}%</div>
+  """.format(value=value, max=max))
+
+def strikeThrough(word):
+  return """
+    <span style="text-decoration: line-through;">{word}</span>
+  """.format(word=word)
+
+def strikeThroughText(word, text):
+  regex = re.compile(f'\b{word}\b')
+  res = re.sub(regex, strikeThrough(word), text)
+  display(HTML(
+    "<p>{res}</p>".format(res=res)
+  ))
+
+def showChanges(tokens, only=None):
+  res = []
+  for token in tokens:
+      if (
+        token.cleaned is not None
+        and token.cleaned != token.term
+        and (only is None or token in only)):
+        res.append(
+          strikeThrough(token.term))
+        res.append(token.cleaned)
+      else:
+        res.append(token.term)
+  display(HTML(
+    "<p>{res}</p>".format(res=" ".join(res))
+  ))
