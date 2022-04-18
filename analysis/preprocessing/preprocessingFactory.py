@@ -9,8 +9,9 @@ STOPWORDS = StopWordRemoverFactory().get_stop_words()
 
 class PreprocessingFactory:
   
-  def __init__(self, d=None):
+  def __init__(self, d=None, special={}):
     self.data = []
+    self.special = special
     if d is not None:
       self.load_data(d)
 
@@ -39,5 +40,5 @@ class PreprocessingFactory:
         p.update(progress(
           (i + 1) * 100 / len(self.data), 100
         ))
-      r.clean()
+      r.clean(special=self.special)
     return True

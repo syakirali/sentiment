@@ -92,7 +92,7 @@ class Preprocessing:
     cleaned = cleaned.strip()
     return cleaned
 
-  def clean(self):
+  def clean(self, special={}):
 
     cleaned = self.clean_with_regex()
 
@@ -101,6 +101,11 @@ class Preprocessing:
       # Menghilangkan karakter yang berada di awalan atau akhiran
       # contoh: "--pemilu" menjadi "pemilu"
       word = word.strip("-")
+
+      if word in special:
+        token = Token(word, special[word])
+        self.tokens.append(token)
+        continue
 
       if word == "" or is_stopwords(word):
         continue
