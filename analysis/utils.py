@@ -85,9 +85,7 @@ def play_alarm():
   return IPython.display.Audio(ALARM, autoplay=True)
 
 def term_freq(terms):
-  tf = Counter()
-  for t in terms:
-    terms.update(t)
+  tf = Counter(terms)
   return tf
 
 def progress(value, max=100):
