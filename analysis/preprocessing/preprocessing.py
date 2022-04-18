@@ -8,6 +8,9 @@ from .wordEmbedding import correction2
 
 STOPWORDS = StopWordRemoverFactory().get_stop_words()
 
+USER_TAG_REGEX = re.compile('@[^\s]+')
+HASHTAG_REGEX = re.compile('#([^\s]+)')
+
 class Preprocessing:
   
   def __init__(self, tweet):
@@ -15,9 +18,17 @@ class Preprocessing:
     self.text = tweet['text']
     self.cleaned_text = None
     self.tokens = []
+    self._usertags = USER_TAG_REGEX.findall(self.text)
+    self._hashtags = HASHTAG_REGEX.findall(self.text)
 
   def load_text(self, text):
     self.text = text
+
+  def get_usertags(self):
+    return self._usertags
+
+  def get_hashtags(self):
+    return self._hashtags
 
   def update_cleaned(self):
     self.cleaned_text = " ".join(
@@ -42,11 +53,11 @@ class Preprocessing:
 
     ###########
     # Convert @username to AT_USER
-    cleaned = re.sub('@[^\s]+', " ", cleaned)
+    cleaned = re.sub(USER_TAG_REGEX, " ", cleaned)
 
     ###########
     # Remove hastags. ex: "asdfasdf #pastibisa #eifjaa" to "asdfasdf "
-    cleaned = re.sub(r'#([^\s]+)', " ", cleaned)
+    cleaned = re.sub(HASHTAG_REGEX, " ", cleaned)
 
     ###########
     # Remove duplicate character that more than 2
