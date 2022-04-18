@@ -87,6 +87,11 @@ class Preprocessing:
     cleaned = cleaned.strip()
 
     for word in cleaned.split(" "):
+
+      # Menghilangkan karakter yang berada di awalan atau akhiran
+      # contoh: "--pemilu" menjadi "pemilu"
+      word = word.strip("-")
+
       if word == "" or is_stopwords(word):
         continue
 
