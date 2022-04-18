@@ -13,21 +13,19 @@ class PreprocessingFactory:
     self.data = []
     if d is not None:
       self.load_data(d)
-    self.cleaned_data = []
-    self.unique_tokens = []
 
-  def get_unique_tokens(self, cached=True):
-    if cached:
-      return self.unique_tokens
-    return set([ (token.term, token.cleaned)
-      for p in self.data for token in p.tokens])
+  def get_unique_tokens(self):
+    return list(set(
+      [
+        token
+        for p in self.data
+        for token in p.tokens
+      ]))
 
   def load_data(self, d):
     self.data = [ Preprocessing(tweet) for tweet in d ]
 
-  def get_cleaned_data(self, cached=True):
-    if cached:
-      return self.cleaned_data
+  def get_cleaned_data(self):
     return [ p.cleaned_text for p in self.data if p.is_cleaned ]
 
   def clean_all(self, show_progress=True):
