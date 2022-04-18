@@ -10,3 +10,6 @@ class Token:
 
   def __eq__(self, __o: object) -> bool:
     return self.term == __o.term and self.cleaned == __o.cleaned
+
+  def __hash__(self) -> int:
+      return hash(f'{self.term}/{self.cleaned}')
