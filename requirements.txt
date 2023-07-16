@@ -3,3 +3,4 @@ pandas
 sastrawi
 # pathlib
 gensim
+langdetect
