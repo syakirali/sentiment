@@ -26,13 +26,7 @@ class PreprocessingFactory:
   def load_data(self, d):
     self.data = [ Preprocessing(tweet) for tweet in d ]
 
-  def get_cleaned_data(self):
-    return [ p.cleaned_text for p in self.data if p.is_cleaned ]
-
-  def filter_indonesian(self):
-    self.data = [p for p in self.data if p.is_indonesian()]
-
-  def clean_all(self, show_progress=True):
+  def clean_all(self, show_progress=True, only_indonesian=True):
     if show_progress:
       p = display(progress(0, 100), display_id=True)
     for i, r in enumerate(self.data):
@@ -40,5 +34,5 @@ class PreprocessingFactory:
         p.update(progress(
           (i + 1) * 100 / len(self.data), 100
         ))
-      r.clean(special=self.special)
+      r.clean(special=self.special, only_indonesian=only_indonesian)
     return True
