@@ -8,11 +8,10 @@ from collections import Counter
 from IPython.display import HTML, display
 
 ROOT_PATH = Path(__file__).resolve().parent
-DEFAULT_DB = ROOT_PATH / "data" / "tweets3.db"
 DEFAULT_QUERY = "SELECT * FROM tweets"
 
 def get_sqlite_data(
-    path=DEFAULT_DB,
+    path,
     query=DEFAULT_QUERY,
     limit=None):
   # Create your connection.
@@ -23,15 +22,6 @@ def get_sqlite_data(
   data = pd.read_sql_query(query, cnx)
   cnx.close()
   return data
-
-def get_tweet(tweet_id):
-  c = sqlite3.connect(DEFAULT_DB)
-  c.row_factory = sqlite3.Row
-
-  cur = c.cursor()
-  cur.execute('SELECT * FROM tweets WHERE tweet_id=? LIMIT 1', (tweet_id, ))
-
-  return cur.fetchone()['text']
 
 def save_to_sqlite(f_path, data):
   conn = sqlite3.connect(f_path)

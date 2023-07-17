@@ -20,6 +20,7 @@ class Preprocessing:
     self.tokens = []
     self._usertags = USER_TAG_REGEX.findall(text)
     self._hashtags = HASHTAG_REGEX.findall(text)
+    self.indonesian = self.is_indonesian()
 
   def load_text(self, text):
     self.text = text
@@ -91,7 +92,10 @@ class Preprocessing:
     cleaned = cleaned.strip()
     return cleaned
 
-  def clean(self, special={}):
+  def clean(self, special={}, only_indonesian=True):
+
+    if only_indonesian and not self.indonesian:
+      return
 
     cleaned = self.clean_with_regex()
 
