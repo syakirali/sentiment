@@ -14,13 +14,12 @@ HASHTAG_REGEX = re.compile('#([^\s]+)')
 
 class Preprocessing:
   
-  def __init__(self, tweet):
-    self.tweet_id = tweet['tweet_id']
-    self.text = tweet['text']
+  def __init__(self, text):
+    self.text = text
     self.cleaned_text = None
     self.tokens = []
-    self._usertags = USER_TAG_REGEX.findall(self.text)
-    self._hashtags = HASHTAG_REGEX.findall(self.text)
+    self._usertags = USER_TAG_REGEX.findall(text)
+    self._hashtags = HASHTAG_REGEX.findall(text)
 
   def load_text(self, text):
     self.text = text
